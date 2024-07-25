@@ -61,6 +61,9 @@ install_version() {
     mkdir -p "$install_path"
     download_release "$version" "$release_file"
     unzip $release_file -d "${install_path}/bin" || fail "Could not extract $release_file"
+    if [ "$(uname -s)" == "Linux" ]; then
+      mv "${install_path}/bin/swiftformat_linux" "${install_path}/bin/swiftformat"
+    fi
     rm "$release_file"
 
     local tool_cmd
